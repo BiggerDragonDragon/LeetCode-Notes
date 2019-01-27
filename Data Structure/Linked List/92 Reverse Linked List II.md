@@ -62,3 +62,46 @@ public:
 
 - Time complexity : O(n). Assume that n is the list's length, the time complexity is O(n).
 - Space complexity : O(1)
+
+## Solution (Python)
+
+```python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def reverseBetween(self, head, m, n):
+        """
+        :type head: ListNode
+        :type m: int
+        :type n: int
+        :rtype: ListNode
+        """
+        start = head
+        numChangeNode = n - m + 1
+        preHead = None
+        m = m - 1
+        while(head and m):
+            preHead = head
+            head = head.next
+            m = m - 1
+        LastNodeAfterReverse = head
+        newHead = None
+        nextNode = None
+        while(numChangeNode):
+            nextNode = head.next
+            head.next = newHead
+            newHead = head
+            head = nextNode
+            numChangeNode = numChangeNode - 1
+        LastNodeAfterReverse.next = nextNode
+        if(preHead):
+            preHead.next = newHead
+        else:
+            start = newHead
+        return start
+```
+
