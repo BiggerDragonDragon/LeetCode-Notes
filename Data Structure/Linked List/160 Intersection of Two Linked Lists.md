@@ -191,6 +191,47 @@ public:
 ------
 
 ```python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        lenA = 0
+        lenB = 0
+        StartA = headA
+        StartB = headB
+        while(StartA):
+            lenA += 1
+            StartA = StartA.next
+        while(StartB):
+            lenB += 1
+            StartB = StartB.next
+        if(lenA >= lenB):
+            Diff = lenA - lenB
+            StartA = headA
+            StartB = headB
+            while(Diff):
+                StartA =StartA.next
+                Diff -= 1
+        else:
+            Diff = lenB - lenA
+            StartA = headA
+            StartB = headB
+            while(Diff):
+                StartB =StartB.next    
+                Diff -= 1
+        while(StartA):
+            if(StartA == StartB):
+                return StartA
+            StartA = StartA.next
+            StartB = StartB.next
+        return None
 ```
 
